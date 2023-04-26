@@ -28,6 +28,7 @@ export function callApi({
       if (resultCode < 0) {
         message.error(resultMessage);
       }
+
       return {
         isSuccess: resultCode === ResultCode.Success,
         data: response.data.data,

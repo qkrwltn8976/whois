@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Col, Row, Typography } from "antd";
 import { Settings } from "@/search/component/Settings";
+import { SearchInput } from "./SearchInput";
 
 export interface ISearchProps {}
 
@@ -18,7 +19,9 @@ export function Search(props: ISearchProps) {
         </Col>
       </Row>
       <Row justify="center" style={{ marginTop: 50 }}>
-        <Col span={12}>검색</Col>
+        <Col span={12}>
+          <SearchInput />
+        </Col>
       </Row>
     </>
   );
