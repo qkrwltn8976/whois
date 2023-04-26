@@ -1,22 +1,20 @@
-import {
-  createSetValueAction,
-  setValueReducer,
-} from "./../../common/redux-helper";
+import { createSetValueAction } from "./../../common/redux-helper";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { callApi } from "@/common/util/api";
+import { Search } from "@/types/Search";
 
 interface SearchState {
   keyword: string;
-  autoComplete: string[];
+  autoCompletes: Search[];
 }
 const initialState: SearchState = {
   keyword: "",
-  autoComplete: [],
+  autoCompletes: [],
 };
 
 export const fetchAutoComplete = createAsyncThunk(
   "search/autoComplete",
-  async ({ keyword }: { keyword: string }, { rejectWithValue }) => {
+  async (keyword: string, { rejectWithValue }) => {
     try {
       const { isSuccess, data } = await callApi({
         url: "/user/search",
@@ -35,17 +33,14 @@ const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    // setValue: createSetValueAction,
+    setValue: createSetValueAction,
   },
   extraReducers: (builder) => {
-    builder.addCase(
-      fetchAutoComplete.fulfilled,
-      (state, { payload: keyword }) => {
-        if (keyword) {
-          state.keyword = keyword;
-        }
+    builder.addCase(fetchAutoComplete.fulfilled, (state, { payload }) => {
+      if (payload) {
+        state.autoCompletes = payload;
       }
-    );
+    });
   },
 });
 
