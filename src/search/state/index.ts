@@ -1,10 +1,11 @@
 import { createSetValueAction } from "./../../common/redux-helper";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { callApi } from "@/common/util/api";
+import { Search } from "@/types/Search";
 
 interface SearchState {
   keyword: string;
-  autoCompletes: string[];
+  autoCompletes: Search[];
 }
 const initialState: SearchState = {
   keyword: "",
