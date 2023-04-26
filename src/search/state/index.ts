@@ -1,11 +1,11 @@
 import { createSetValueAction } from "./../../common/redux-helper";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { callApi } from "@/common/util/api";
-import { Search } from "@/types/Search";
+import { User } from "@/types/User";
 
 interface SearchState {
   keyword: string;
-  autoCompletes: Search[];
+  autoCompletes: User[];
 }
 const initialState: SearchState = {
   keyword: "",
@@ -24,9 +24,7 @@ export const fetchAutoComplete = createAsyncThunk(
       if (isSuccess && data) {
         return data;
       }
-    } catch (err) {
-      //   return rejectWithValue(err?.response?.status);
-    }
+    } catch (err) {}
   }
 );
 const searchSlice = createSlice({
@@ -37,9 +35,7 @@ const searchSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAutoComplete.fulfilled, (state, { payload }) => {
-      if (payload) {
-        state.autoCompletes = payload;
-      }
+      state.autoCompletes = payload;
     });
   },
 });
