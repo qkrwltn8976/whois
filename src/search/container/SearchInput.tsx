@@ -7,7 +7,7 @@ import { fetchAutoComplete, searchActions } from "../state";
 
 interface ISearchInputProps {}
 
-export function SearchInput(props: ISearchInputProps) {
+const SearchInput = (props: ISearchInputProps) => {
   const keyword = useSelector((state: RootState) => state.search.keyword);
   const dispatch = useDispatch<AppDispatch>();
   const setKeyword = (value: string) => {
@@ -45,4 +45,6 @@ export function SearchInput(props: ISearchInputProps) {
       />
     </AutoComplete>
   );
-}
+};
+
+export default SearchInput;

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Col, Row, Typography } from "antd";
 import { Settings } from "@/search/component/Settings";
-import { SearchInput } from "./SearchInput";
+import SearchInput from "./SearchInput";
 
 export interface ISearchProps {}
 
-export function Search(props: ISearchProps) {
+const Search = (props: ISearchProps) => {
   return (
     <>
       <Row justify="end" style={{ padding: 20 }}>
@@ -25,4 +25,6 @@ export function Search(props: ISearchProps) {
       </Row>
     </>
   );
-}
+};
+
+export default Search;
