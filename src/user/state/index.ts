@@ -5,12 +5,14 @@ import { User } from "@/types/User";
 
 interface UserState {
   user: User | undefined;
+  isFetching: boolean;
 }
 const initialState: UserState = {
   user: undefined,
+  isFetching: false,
 };
 
-export const fetchUser = createAsyncThunk(
+export const thunkFetchUser = createAsyncThunk(
   "user/fetchUser",
   async (name: string, { rejectWithValue }) => {
     try {
@@ -26,7 +28,7 @@ export const fetchUser = createAsyncThunk(
   }
 );
 
-export const fetchUpdateUser = createAsyncThunk(
+export const thunkFetchUpdateUser = createAsyncThunk(
   "user/fetchUpdateUser",
   async ({
     type,
@@ -63,10 +65,14 @@ const userSlice = createSlice({
     setValue: createSetValueAction,
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchUser.fulfilled, (state, { payload }) => {
-      state.user = payload;
+    builder.addCase(thunkFetchUser.pending, (state, { payload }) => {
+      state.isFetching = true;
     });
-    builder.addCase(fetchUpdateUser.fulfilled, (state, { payload }) => {
+    builder.addCase(thunkFetchUser.fulfilled, (state, { payload }) => {
+      state.user = payload;
+      state.isFetching = false;
+    });
+    builder.addCase(thunkFetchUpdateUser.fulfilled, (state, { payload }) => {
       state.user = payload;
     });
   },

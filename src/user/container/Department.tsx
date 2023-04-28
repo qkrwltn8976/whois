@@ -2,7 +2,7 @@ import { RootState, useAppDispatch } from "@/store";
 import { Button, Input, message } from "antd";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { fetchUpdateUser } from "../state";
+import { thunkFetchUpdateUser } from "../state";
 
 interface IDepartmentProps {}
 
@@ -10,13 +10,13 @@ const Department = (props: IDepartmentProps) => {
   const [isEditDepartment, setIsEditDepartment] = useState(false);
   const [tempDepartment, setTempDepartment] = useState("");
   const user = useSelector((state: RootState) => state.user.user);
-  if (!user) return;
+  if (!user) return <></>;
   const dispatch = useAppDispatch();
 
   const onSaveDepartment = () => {
     if (tempDepartment) {
       dispatch(
-        fetchUpdateUser({
+        thunkFetchUpdateUser({
           user,
           key: "department",
           value: tempDepartment,

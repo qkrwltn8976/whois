@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
-import { fetchUser } from "../state";
+import { fetchUser, thunkFetchUser } from "../state";
 import { useAppDispatch } from "@/store/hooks";
 import History from "@/common/component/History";
 import TagList from "./TagList";
@@ -20,7 +20,7 @@ const User = ({}: IUserProps) => {
 
   useEffect(() => {
     if (name) {
-      dispatch(fetchUser(name));
+      dispatch(thunkFetchUser(name));
     }
   }, [name]);
 

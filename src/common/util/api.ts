@@ -9,7 +9,7 @@ interface CallApiInterface {
   data?: object;
 }
 
-export function callApi({
+export function callApi<T extends _>({
   method = "get",
   url,
   params,
