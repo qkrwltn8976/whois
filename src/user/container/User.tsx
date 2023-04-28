@@ -6,6 +6,9 @@ import { useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
 import { fetchUser } from "../state";
 import { useAppDispatch } from "@/store/hooks";
+import History from "@/common/component/History";
+import TagList from "./TagList";
+import Department from "./Department";
 
 interface IUserProps {}
 
@@ -33,10 +36,14 @@ const User = ({}: IUserProps) => {
                 <Typography.Text>{user.name}</Typography.Text>
               </Descriptions.Item>
               <Descriptions.Item label="소속">
-                {user.department}
+                <Department />
               </Descriptions.Item>
-              <Descriptions.Item label="태그">{user.tag}</Descriptions.Item>
-              <Descriptions.Item label="수정 내역">수정 내역</Descriptions.Item>
+              <Descriptions.Item label="태그">
+                <TagList />
+              </Descriptions.Item>
+              <Descriptions.Item label="수정 내역">
+                <History />
+              </Descriptions.Item>
             </Descriptions>
           )}
           {!user && isFetched && (

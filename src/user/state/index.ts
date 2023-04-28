@@ -25,6 +25,37 @@ export const fetchUser = createAsyncThunk(
     } catch (err) {}
   }
 );
+
+export const fetchUpdateUser = createAsyncThunk(
+  "user/fetchUpdateUser",
+  async ({
+    type,
+    user,
+    key,
+    value,
+  }: {
+    type: string;
+    user: User;
+    key: string;
+    value: string;
+  }) => {
+    try {
+      const oldValue: string = user[key];
+      const { isSuccess, data } = await callApi({
+        url: "/user/update",
+        method: "post",
+        data: { name: user.name, key, value, oldValue },
+      });
+      if (isSuccess && data) {
+        return {
+          ...user,
+          [key]: value,
+        };
+      }
+    } catch (err) {}
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -33,6 +64,9 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUser.fulfilled, (state, { payload }) => {
+      state.user = payload;
+    });
+    builder.addCase(fetchUpdateUser.fulfilled, (state, { payload }) => {
       state.user = payload;
     });
   },
