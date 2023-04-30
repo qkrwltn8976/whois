@@ -1,4 +1,4 @@
-import { RootState } from ".";
+import { RootState } from "@/store";
 import { createSetValueAction } from "./../../common/redux-helper";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { callApi } from "@/common/util/api";
