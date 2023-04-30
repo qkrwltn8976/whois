@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
+    "@ant-design/pro-layout": "^7.12.2",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/react-hooks": "^8.0.1",
     "antd": "^5.4.3",
