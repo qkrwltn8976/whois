@@ -2,6 +2,7 @@ import { createSetValueAction } from "./../../common/redux-helper";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { callApi } from "@/common/util/api";
 import { User } from "@/types/User";
+import { RootState } from "@/store";
 
 interface UserState {
   user: User | undefined;
@@ -79,4 +80,6 @@ const userSlice = createSlice({
 });
 
 export const userActions = userSlice.actions;
+export const selectUser = (state: RootState): User | undefined =>
+  state.user.user;
 export default userSlice.reducer;

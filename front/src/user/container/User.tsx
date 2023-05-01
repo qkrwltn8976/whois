@@ -1,22 +1,20 @@
-import { Col, Descriptions, Row, Typography } from "antd";
+import { Col, Descriptions, Row, Typography, Space } from "antd";
 import { PageHeader } from "@ant-design/pro-layout";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/store";
-import { fetchUser, thunkFetchUser } from "../state";
-import { useAppDispatch } from "@/store/hooks";
+import { selectUser, thunkFetchUser } from "../state";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import History from "@/common/component/History";
 import TagList from "./TagList";
 import Department from "./Department";
 
-interface IUserProps {}
+interface IUserProps { }
 
-const User = ({}: IUserProps) => {
+const User = ({ }: IUserProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { name } = useParams();
-  const user = useSelector((state: RootState) => state.user.user);
+  const user = useAppSelector(selectUser);
 
   useEffect(() => {
     if (name) {
@@ -29,7 +27,11 @@ const User = ({}: IUserProps) => {
   return (
     <Row justify="center">
       <Col xs={24} md={20} lg={14}>
-        <PageHeader onBack={() => navigate(-1)} title="사용자 정보">
+        <PageHeader onBack={() => navigate(-1)} title={
+          <Space>
+            사용자 정보
+          </Space>
+        }>
           {user && (
             <Descriptions layout="vertical" bordered column={1}>
               <Descriptions.Item label="이름">

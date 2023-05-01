@@ -1,15 +1,15 @@
-import { RootState, useAppDispatch } from "@/store";
+import { useAppDispatch } from "@/store";
+import { useAppSelector } from "@/store/hooks";
 import { Button, Input, message } from "antd";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { thunkFetchUpdateUser } from "../state";
+import { selectUser, thunkFetchUpdateUser } from "../state";
 
-interface IDepartmentProps {}
+interface IDepartmentProps { }
 
 const Department = (props: IDepartmentProps) => {
   const [isEditDepartment, setIsEditDepartment] = useState(false);
   const [tempDepartment, setTempDepartment] = useState("");
-  const user = useSelector((state: RootState) => state.user.user);
+  const user = useAppSelector(selectUser);
   if (!user) return <></>;
   const dispatch = useAppDispatch();
 
